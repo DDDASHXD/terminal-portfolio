@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
 
 * {
     margin: 0;
@@ -21,6 +21,7 @@ body {
 .App {
     width: 100vw;
     padding: 10px;
+    min-height: 100vh;
 }
 
 h1 {
@@ -44,6 +45,10 @@ h1 {
             outline: none;
         }
     }
+}
+
+p {
+    white-space: pre-wrap;
 }
 
 .path {
@@ -73,6 +78,10 @@ span {
     &.backend {
         color: #BF616A;
         text-shadow: 0px 0px 11px #BF616A;
+    }
+
+    &.bold {
+        font-weight: 700;
     }
 }
 
