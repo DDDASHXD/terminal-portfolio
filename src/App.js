@@ -5,6 +5,12 @@ import Input from './components/input';
 
 const initialPath = "user@dashxd.dev > "
 
+const projects = [
+  {id: 1, image: require('./assets/powerhour.png'),  name: "Better Power Hour", tags: 'React / SCSS', description: "A clone of drinkvirtually's power hour app, with added features like custom tasks.", link: "https://powerhour.justdiv.studio"},
+  {id: 2, image: require('./assets/huedle.png'),  name: "Huedle", tags: 'React / SCSS', description: "A clone of Wordle, called Huedle, which i cloned again for a school project. This time also for non hex color nerds!", link: "https://hue.justdiv.studio"},
+  {id: 3, image: require('./assets/metacrash.png'),  name: "Metacrash", tags: 'React / SCSS / Express / MongoDB', description: "An online crypto based gambling website based on the Crash game. Just a prototype, but fully working, just without actual cryptocurrency.", link: "https://justdiv.studio"},
+]
+
 function App() {
   const [inputValue, setInputValue] = useState('');
   const [log, setLog] = useState([])
@@ -25,6 +31,9 @@ function App() {
 
     </p>
     <p>Welcome to dashxd.dev. This is a concept portfolio, that is styled to look like<br />a terminal that you would find on Linux, Windows and OS X.</p>
+    <p>Currently my main portfolio, while i work on something more user friendly.</p><br />
+    <p>The mobile experience leaves much to be desired,<br />
+    but will surely be worked on in the future.</p>
     <br />
     <p>There are only a few commands, and you can type <span className="command">help</span> below, to get an overview of them.</p>
     </>
@@ -83,15 +92,44 @@ function App() {
             setLog([...log, input])
             break;
           case 'projects':
-            input = [<p className="logPath path">{path}<span className='notPath'>{inputValue}</span></p>,
-                      <p>Projects will come soon.</p>,];
-            setLog([...log, input])
+            input = [<p className="logPath path">{path}<span className='notPath'>{inputValue}</span></p>];
+
+            // projectsCommand();
+            let input2 = [];
+            for (let i = 0; i < projects.length; i++) {
+              if (inputValue.includes(projects[i].id)) {
+                document.location.href = projects[i].link;
+              }
+
+              input2.push([
+                <div className="projects" key={projects[i].id}>
+                  <div className="project">
+                    <img src={projects[i].image} className={"project-image "} style={{background: projects[i].image, width: "10rem", height: "10rem"}}></img>
+                    <p className="project-title"><span className="command">{projects[i].name}</span></p>
+                    <p className="project-tags">{projects[i].tags}</p>
+                    <p className="project-description">{projects[i].description}</p>
+                    <p className="project-link"><a href={projects[i].link}>Visit site</a></p>
+                  </div>
+                </div>
+              ])
+            }
+            setLog([...log, input, input2]);
             break;
           case 'blog':
             input = [<p className="logPath path">{path}<span className='notPath'>{inputValue}</span></p>,
                     <p>This will take you to <a href="https://blog.dashxd.dev">https://blog.dashxd.dev</a></p>,];
             setLog([...log, input])
             confirm();
+            break;
+          case 'exit':
+            input = [<p className="logPath path">{path}<span className='notPath'>{inputValue}</span></p>,
+                    <p>Please don't ): At least check out <span className="command">projects</span> first</p>,];
+            setLog([...log, input])
+            break;
+          case 'sudo':
+            input = [<p className="logPath path">{path}<span className='notPath'>{inputValue}</span></p>,
+                    <p><span className="backend">Sorry, but i can't allow you to do that. You don't know the password (:</span></p>,];
+            setLog([...log, input])
             break;
           default:
             input = [<p className="logPath path">{path}<span className='notPath'>{inputValue}</span></p>, <p>The command "{inputValue}" is not recognised.</p>]

@@ -111,3 +111,27 @@ a {
         }
     }
 }
+
+.projects {
+    .project {
+        &:not(.last) {
+            margin-bottom: 2rem;
+        }
+        &-image {
+            object-fit: cover;
+        }
+
+        &-title {
+            font-weight: 700;
+        }
+
+        &-tags {
+            margin-bottom: 1rem;
+        }
+
+        &-description {
+            max-width: 30rem;
+            margin-bottom: 1rem;
+        }
+    }
+}
